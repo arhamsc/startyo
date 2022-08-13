@@ -3,7 +3,7 @@ import 'package:startyo/theme/text.theme.dart';
 
 class Palette {
   static const MaterialColor textColor = MaterialColor(
-    0x565656FF,
+    0xFF565656,
     <int, Color>{
       50: Color.fromRGBO(86, 86, 86, .1),
       100: Color.fromRGBO(86, 86, 86, .2),
@@ -18,7 +18,7 @@ class Palette {
     },
   );
   static const MaterialColor primary = MaterialColor(
-    0x006A6AFF,
+    0xFF006A6A,
     <int, Color>{
       50: Color.fromRGBO(0, 106, 106, .1),
       100: Color.fromRGBO(0, 106, 106, .2),
@@ -33,7 +33,7 @@ class Palette {
     },
   );
   static const MaterialColor secondary = MaterialColor(
-    0x006A6AFF,
+    0xFF006A6A,
     <int, Color>{
       50: Color.fromRGBO(86, 86, 86, .1),
       100: Color.fromRGBO(86, 86, 86, .2),
@@ -63,7 +63,7 @@ class Palette {
     },
   );
   static const MaterialColor heading = MaterialColor(
-    0x333333FF,
+    0xFF333333,
     <int, Color>{
       50: Color.fromRGBO(51, 51, 51, .1),
       100: Color.fromRGBO(51, 51, 51, .2),

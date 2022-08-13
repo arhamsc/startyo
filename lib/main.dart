@@ -5,7 +5,8 @@ import 'package:sizer/sizer.dart';
 import 'package:startyo/data/loginState.enum.dart';
 import 'package:startyo/firebase_options.dart';
 import 'package:startyo/providers/auth.providers.dart';
-import 'package:startyo/src/screens/auth.screen.dart';
+import 'package:startyo/src/screens/authLogin.screen.dart';
+import 'package:startyo/src/screens/authSignUp.screen.dart';
 import 'package:startyo/theme/button.theme.dart';
 import 'package:startyo/theme/colors.theme.dart';
 import 'package:startyo/theme/text.theme.dart';
@@ -38,13 +39,15 @@ class _MyAppState extends State<MyApp> {
           builder: (context, orientation, deviceType) => MaterialApp(
             title: 'Flutter Demo',
             theme: ThemeData(
-                primarySwatch: Palette.primary,
-                appBarTheme: AppBarThemes.appBarTheme(),
-                scaffoldBackgroundColor: Palette.tertiary,
-                textTheme: TextThemes.typography,
-                elevatedButtonTheme: ButtonThemes.elevatedButton,
-                textButtonTheme: ButtonThemes.textButton,
-                bottomAppBarTheme: AppBarThemes.bottomNav()),
+              primarySwatch: Palette.primary,
+              appBarTheme: AppBarThemes.appBarTheme(),
+              scaffoldBackgroundColor: Palette.tertiary,
+              textTheme: TextThemes.typography,
+              elevatedButtonTheme: ButtonThemes.elevatedButton,
+              textButtonTheme: ButtonThemes.textButton,
+              bottomAppBarTheme: AppBarThemes.bottomNav(),
+              outlinedButtonTheme: ButtonThemes.outlinedButton,
+            ),
             home: Scaffold(
               body: HomePage(
                 auth: auth,
@@ -70,8 +73,10 @@ class _HomePageState extends State<HomePage> {
     switch (widget.auth.authLoginState) {
       case AuthLoginState.login:
         return const LoginScreen();
+      case AuthLoginState.signUp:
+        return const SignUpScreen();
       default:
-        return Center(
+        return const Center(
           child: Text("Child"),
         );
     }

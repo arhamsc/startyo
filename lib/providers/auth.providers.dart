@@ -19,7 +19,10 @@ class AuthProvider with ChangeNotifier {
   Mentor get mentor => _mentor;
 
   AuthLoginState get authLoginState => _authLoginState;
-  set authLoginState(AuthLoginState state) => _authLoginState = state;
+  void setAuthLoginState(AuthLoginState state) {
+    _authLoginState = state;
+    notifyListeners();
+  }
 
   Future<void> loginAsStartUp(String email, String password) async {
     try {
@@ -106,5 +109,10 @@ class AuthProvider with ChangeNotifier {
     }
     notifyListeners();
     _authLoginState = AuthLoginState.login;
+  }
+
+  void switchToSignUp() {
+    _authLoginState = AuthLoginState.signUp;
+    notifyListeners();
   }
 }
