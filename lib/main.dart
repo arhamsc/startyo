@@ -7,6 +7,8 @@ import 'package:startyo/firebase_options.dart';
 import 'package:startyo/providers/auth.providers.dart';
 import 'package:startyo/src/screens/authLogin.screen.dart';
 import 'package:startyo/src/screens/authSignUp.screen.dart';
+import 'package:startyo/src/screens/dashboard.screen.dart';
+import 'package:startyo/src/screens/getStarted.screen.dart';
 import 'package:startyo/theme/button.theme.dart';
 import 'package:startyo/theme/colors.theme.dart';
 import 'package:startyo/theme/text.theme.dart';
@@ -75,6 +77,10 @@ class _HomePageState extends State<HomePage> {
         return const LoginScreen();
       case AuthLoginState.signUp:
         return const SignUpScreen();
+      case AuthLoginState.signingUp:
+        return const GetStartedScreen();
+      case AuthLoginState.loggedIn:
+        return const DashBoard();
       default:
         return const Center(
           child: Text("Child"),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:startyo/providers/auth.providers.dart';
+import 'package:startyo/src/screens/dashboard.screen.dart';
 import 'package:startyo/src/widgets/UI/bigButton.ui.dart';
 import 'package:startyo/src/widgets/UI/body1.ui.dart';
 import 'package:startyo/src/widgets/UI/header1.ui.dart';
@@ -31,7 +32,14 @@ class _LoginScreenState extends State<LoginScreen> {
     _signInFormKey.currentState?.save();
     _email = _emailController.text;
     _password = _passwordController.text;
-    print(_email);
+    await Provider.of<AuthProvider>(context, listen: false)
+        .loginAsStartUp(_email!, _password!);
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => const DashBoard(),
+      ),
+    );
+    // print(_email);
   }
 
   @override

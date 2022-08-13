@@ -18,6 +18,8 @@ class AuthProvider with ChangeNotifier {
   StartUp get startUp => _startUp;
   Mentor get mentor => _mentor;
 
+  String? currPass = "";
+
   AuthLoginState get authLoginState => _authLoginState;
   void setAuthLoginState(AuthLoginState state) {
     _authLoginState = state;
@@ -54,7 +56,7 @@ class AuthProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signUpAsMentor(
+  Future<void> signUpAsStartUp(
       String email,
       String password,
       String fullName,
@@ -75,20 +77,20 @@ class AuthProvider with ChangeNotifier {
       final user = credentials.user;
       await user?.updateDisplayName(fullName);
       final collectionName = role.toString().toLowerCase();
-      final res = await _firestoreInstance
-          .collection(collectionName)
-          .add(<String, dynamic>{
+      final res =
+          await _firestoreInstance.collection("startUps").add(<String, dynamic>{
         'userId': user?.uid,
         'email': email,
         'fullName': fullName,
         'phone': phone,
-        'role': role,
+        'role': role.toString(),
         'idea': idea,
-        'phase': phase,
+        'phase': phase.toString(),
         'valuation': valuation,
         "companyName": companyName,
         'category': category.toString()
       });
+
       _startUp = StartUp(
         companyName: companyName,
         userId: user?.uid,
@@ -101,14 +103,56 @@ class AuthProvider with ChangeNotifier {
         valuation: valuation,
         category: category,
       );
+
       _authLoginState = AuthLoginState.loggedIn;
       notifyListeners();
       print(res);
     } on FirebaseAuthException catch (e) {
       print(e.message);
+    } catch (error) {
+      print(error);
     }
     notifyListeners();
     _authLoginState = AuthLoginState.login;
+  }
+
+  void setCurrPass(String password) {
+    currPass = password;
+  }
+
+  void setLocalState(
+    String email,
+    String fullName,
+    int phone,
+    Role role,
+    String idea,
+    Phase phase,
+    double valuation,
+    String companyName,
+    DomainCategory category,
+  ) {
+    // print(email +
+    //     password +
+    //     fullName +
+    //     phone.toString() +
+    //     role.toString() +
+    //     idea.toString() +
+    //     phase.toString() +
+    //     valuation.toString() +
+    //     companyName +
+    //     category.toString());
+    _startUp = StartUp(
+      companyName: companyName,
+      fullName: fullName,
+      userId: "placeholder",
+      phone: phone,
+      email: email,
+      role: role,
+      idea: idea,
+      phase: phase,
+      valuation: valuation,
+      category: category,
+    );
   }
 
   void switchToSignUp() {

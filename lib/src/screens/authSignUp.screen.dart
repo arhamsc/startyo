@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:startyo/data/category.enum.dart';
 import 'package:startyo/data/loginState.enum.dart';
+import 'package:startyo/data/phase.enu.dart';
 import 'package:startyo/data/role.enum.dart';
 import 'package:startyo/providers/auth.providers.dart';
 import 'package:startyo/src/widgets/UI/bigButton.ui.dart';
@@ -22,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final GlobalKey<FormState> _signInFormKey = GlobalKey();
   String? _fullName;
   String? _email;
-  String? _phone;
+  int? _phone;
   String? _password;
   String? _confirmPassword;
   Role? _role;
@@ -45,28 +47,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
     ),
   ];
 
-  Future<void> submitSignUp() async {
+  void submitSignUp() async {
     final isValid = _signInFormKey.currentState?.validate() ?? false;
 
+    if (!isValid) {
+      return;
+    }
+
+    _signInFormKey.currentState?.save();
+
+    // print(_fullNameController.text);
     _fullName = _fullNameController.text.trim();
     _email = _emailController.text.trim();
-    _phone = _phoneController.text.trim();
+    _phone = int.parse(_phoneController.text);
+    // print(_phoneController.text);
+    // print(_email);
     _password = _passwordController.text.trim();
+    // print(_password);
     _confirmPassword = _confirmPasswordController.text.trim();
+
+    // print(_role);
 
     if (_password != _confirmPassword) {
       _signInFormKey.currentState?.reset();
       return;
     }
 
-    if (!isValid) {
-      print("not valid");
-      return;
-    }
+    final provider = Provider.of<AuthProvider>(context, listen: false);
+    provider.setCurrPass(_password!);
+    provider.setLocalState(
+      _email!,
+      _fullName!,
+      _phone!,
+      _role!,
+      "s",
+      Phase.idea,
+      0,
+      "s",
+      DomainCategory.edTech,
+    );
 
-    _signInFormKey.currentState?.save();
-    _email = _emailController.text;
-    print(_email);
+    provider.setAuthLoginState(AuthLoginState.signingUp);
+    // print(_email);
   }
 
   @override
