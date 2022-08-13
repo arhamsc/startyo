@@ -81,10 +81,12 @@ class Palette {
 
 class AppBarThemes {
   static AppBarTheme appBarTheme() {
-    return const AppBarTheme(
-      iconTheme: IconThemeData(color: Palette.primary, size: 24),
-      backgroundColor: Palette.secondary,
+    return AppBarTheme(
+      iconTheme: const IconThemeData(color: Palette.primary, size: 24),
+      backgroundColor: Palette.primary.shade200,
       centerTitle: false,
+      elevation: 0,
+      toolbarHeight: 40,
     );
   }
 

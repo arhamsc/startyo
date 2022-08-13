@@ -180,11 +180,6 @@ class _EstablishmentState extends State<Establishment> {
               BigButton(
                 buttonFunc: () async {
                   await moveNext();
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const DashBoard(),
-                    ),
-                  );
                 },
                 text: "Finish",
               )
