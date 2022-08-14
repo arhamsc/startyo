@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:startyo/src/screens/chat.screen.dart';
 import 'package:startyo/src/widgets/UI/body1.ui.dart';
 import 'package:startyo/src/widgets/UI/header1.ui.dart';
 import 'package:startyo/theme/colors.theme.dart';
@@ -70,7 +71,13 @@ class DashBoard extends StatelessWidget {
                   ServiceCard(
                     title: "Chat with our available mentors?",
                     buttonText: "Chat now",
-                    buttonFunc: () {},
+                    buttonFunc: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const ChatScreen(),
+                        ),
+                      );
+                    },
                   ),
                   ServiceCard(
                     title: "Make a Pitch Deck",
