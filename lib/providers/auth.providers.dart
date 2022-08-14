@@ -107,13 +107,11 @@ class AuthProvider with ChangeNotifier {
       _authLoginState = AuthLoginState.loggedIn;
       notifyListeners();
       print(res);
-    } on FirebaseAuthException catch (e) {
-      print(e.message);
+    
     } catch (error) {
       print(error);
     }
     notifyListeners();
-    _authLoginState = AuthLoginState.login;
   }
 
   void setCurrPass(String password) {
